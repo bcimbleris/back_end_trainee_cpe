@@ -6,8 +6,8 @@ module.exports = {
         const product_id = uuidv4();
 
         produto.product_id = product_id;
-        const result = await connection("produto").insert(produto);
-        return result;
+        await connection("produto").insert(produto);
+        return product_id;
     },
 
     async getById({product_id, user_id}){
