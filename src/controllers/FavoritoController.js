@@ -1,4 +1,4 @@
-const FavoritoModel = require("../models/FavoritoModel");
+const Favorito = require("../models/Favorito");
 
 module.exports = {
     async create(request, response) {

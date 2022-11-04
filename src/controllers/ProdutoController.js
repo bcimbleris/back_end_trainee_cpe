@@ -1,4 +1,4 @@
-const ProdutoModel = require("../models/Produto");
+const Produto = require("../models/Produto");
 
 module.exports = {
     async create(request, response) {
@@ -7,7 +7,7 @@ module.exports = {
 
             const result = await Produto.create(newProduto);
 
-            return response.status(200).json({product_id: result});
+            return response.status(200).json(result);
 
         } catch (error) {
             console.warn("Note creation failed:", error);
@@ -18,11 +18,24 @@ module.exports = {
         }
     },
 
-    async getByUser(request, response) {
+    async getById(request, response) {
         try {
-            
+            const {product_id} = request.params;
+    
+                const result = await Produto.getById({product_id});
+                
+                if(result === 0){
+                    return response.status(400).json({notification:"produto_id not found"});
+                }
+    
+                return response.status(200).json({
+                    notification: "produto GET operation successful",
+                    usuario: result
+                });
+                    
         } catch (error) {
-            
+            console.warn("Getting user failed:", error);
+            return response.status(500).json({notification:"internal server error trying to get produto"});
         }
     },
 
