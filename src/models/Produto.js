@@ -24,7 +24,7 @@ module.exports = {
         return result;
     },
 
-    async deleteById(product_id){
+   async deleteById(product_id){
         const result = await connection("produto").where({product_id}).delete();
         return result;
     },

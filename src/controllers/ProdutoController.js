@@ -18,7 +18,8 @@ module.exports = {
         }
     },
 
-    async getById(request, response) {
+
+   async getById(request, response) {
         try {
             const {product_id} = request.params;
     
@@ -34,26 +35,39 @@ module.exports = {
                 });
                     
         } catch (error) {
-            console.warn("Getting user failed:", error);
+            console.warn("Getting produto failed:", error);
             return response.status(500).json({notification:"internal server error trying to get produto"});
         }
     },
 
-    async update(request, response) {
+
+    async update(request, response){
         try {
-            
+            const {product_id} = request.params;
+            const newProduto = request.body;
+
+            const result = await Produto.updateById(product_id, newProduto);
+
+            return response.status(200).json({notification: "Produto updated successfully"});
         } catch (error) {
-            
+            console.warn("Produto update failed:", error);
+            return response.status(500).json({notification:"internal server error trying to update Produto"});
         }
     },
 
-    async delete(request, response) {
+    async delete(request, response){
         try {
-            
+            const {product_id} = request.params;
+            const result = await Produto.delete(product_id);
+
+            if(result === 0){
+                return response.status(400).json({notification:"product_id not found"});
+            }
+
+            return response.status(200).json({notification: "Produto deleted successfully"});
         } catch (error) {
-            
+            console.warn("Produto delete failed:", error);
+            return response.status(500).json({notification:"internal server error trying to delete produto"});
         }
     },
-
-    
 };

@@ -10,9 +10,9 @@ module.exports = {
         return result;
     },
 
-    async getById({favorito_id, user_id}){
+    async getByUserId({user_id}){
         const result = await connection("favorito")
-            .where({favorito_id, user_id})
+            .where(user_id)
             .select("*");
         return result;
     },
