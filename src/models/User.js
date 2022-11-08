@@ -25,7 +25,7 @@ module.exports = {
         return result;
     },
 
-    async deleteById(user_id){
+    async delete(user_id){
         const result = await connection("user").where({user_id}).delete();
         return result;
     },
