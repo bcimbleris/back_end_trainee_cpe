@@ -17,14 +17,14 @@ module.exports = {
         return result;
     },
 
-    async updateById(product_id, produto){
+    async update(product_id, produto){
         const result = await connection("produto")
             .where(product_id)
             .update(produto);
         return result;
     },
 
-   async deleteById(product_id){
+   async delete(product_id){
         const result = await connection("produto").where({product_id}).delete();
         return result;
     },

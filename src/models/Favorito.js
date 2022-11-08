@@ -17,14 +17,14 @@ module.exports = {
         return result;
     },
 
-    async updateById(favorito_id, favorito){
+    async update(favorito_id, favorito){
         const result = await connection("favorito")
             .where(favorito_id)
             .update(favorito);
         return result;
     },
 
-    async deleteById(favorito_id){
+    async delete(favorito_id){
         const result = await connection("favorito").where({favorito_id}).delete();
         return result;
     },

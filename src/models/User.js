@@ -18,7 +18,7 @@ module.exports = {
         return result;
     },
 
-    async updateById(user_id, user){
+    async update(user_id, user){
         const result = await connection("user")
             .where(user_id)
             .update(user);
