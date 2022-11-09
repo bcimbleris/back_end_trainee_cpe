@@ -10,7 +10,7 @@ module.exports = {
             return response.status(200).json(result);
 
         } catch (error) {
-            console.warn("Note creation failed:", error);
+            console.warn("Favorito creation failed:", error);
 
             return response.status(500).json({
                 notification: "Internal server error while trying to create Favorito"
@@ -19,14 +19,13 @@ module.exports = {
     },
 
 
-   async getByUserId(request, response) {
+   async getById(request, response) {
         try {
             const {user_id} = request.params;
-    
-                const result = await Favorito.getByUser({user_id});
+            const result = await Favorito.getByUserWithFilters( user_id , {});
                 
                 if(result === 0){
-                    return response.status(400).json({notification:"user_id not found"});
+                    return response.status(400).json(result);
                 }
     
                 return response.status(200).json({
@@ -41,7 +40,7 @@ module.exports = {
     },
 
 
-    async update(request, response){
+   /* async update(request, response){
         try {
             const {favorito_id} = request.params;
             const newFavorito = request.body;
@@ -53,7 +52,7 @@ module.exports = {
             console.warn("Favorito update failed:", error);
             return response.status(500).json({notification:"internal server error trying to update Favorito"});
         }
-    },
+    },*/
 
     async delete(request, response){
         try {
