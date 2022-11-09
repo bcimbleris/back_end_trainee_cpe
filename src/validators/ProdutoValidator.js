@@ -4,7 +4,7 @@ module.exports = {
     create: celebrate({
         [Segments.BODY]: Joi.object().keys({
             product_name: Joi.string().required(),
-            price: Joi.number().required(),
+            price: Joi.string().required(),
             description: Joi.string().required(),
         }),
     }),
@@ -19,7 +19,7 @@ module.exports = {
         }),
         [Segments.BODY]: Joi.object().keys({
             product_name: Joi.string().optional(),
-            price: Joi.number().optional(),
+            price: Joi.string().optional(),
             description: Joi.string().email().optional()
     })
     .min(1),
