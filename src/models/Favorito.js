@@ -21,9 +21,9 @@ module.exports = {
 
     async getByUserWithFilters(user_id,{product_name}){
         const result = await connection("favorito")
-            .innerJoin("favorito", "produto.product_id", "favorito.product_id")
-            .where({user_id})
-            .select("*");
+            .innerJoin("produto", "produto.product_id", "favorito.product_id")
+            .where({"favorito.user_id":user_id})
+            .select("produto.product_name", "produto.price", "produto.description");
 
     return result;
     },

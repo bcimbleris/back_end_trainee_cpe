@@ -30,7 +30,7 @@ module.exports = {
     
                 return response.status(200).json({
                     notification: "Favorito GET operation successful",
-                    usuario: result
+                    data: result
                 });
                     
         } catch (error) {
