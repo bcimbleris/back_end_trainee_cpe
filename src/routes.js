@@ -18,7 +18,6 @@ const auth = require("./middlewares/authentication")
 //Session
 
 routes.post("/login", SessionController.signIn);
-routes.delete("/logout", SessionController.signOut);
 
 //User
 routes.get("/user/:user_id", UserValidator.getById, UserController.getById);

@@ -22,7 +22,6 @@ module.exports = {
         const result = await connection("user")
         .where(fields)
         .select("*")
-        .first();
         return result;
     },
 
