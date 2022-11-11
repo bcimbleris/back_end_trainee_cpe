@@ -6,6 +6,10 @@ module.exports = {
             user_id: Joi.string().required(),
             product_id: Joi.string().required(),
         }),
+        [Segments.HEADERS]: Joi.object().keys({
+            authorization: Joi.string().required(),
+        })
+        .unknown(),
     }),
     getById: celebrate({
         [Segments.PARAMS]: Joi.object().keys({

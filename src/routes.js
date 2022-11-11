@@ -12,6 +12,14 @@ const ProdutoValidator = require("./validators/ProdutoValidator");
 const FavoritoController = require("./controllers/FavoritoController");
 const FavoritoValidator = require("./validators/FavoritoValidator");
 
+const SessionController = require("./controllers/SessionController");
+const auth = require("./middlewares/authentication")
+
+//Session
+
+routes.post("/login", SessionController.signIn);
+routes.delete("/logout", SessionController.signOut);
+
 //User
 routes.get("/user/:user_id", UserValidator.getById, UserController.getById);
 routes.post("/user", UserValidator.create, UserController.create);
@@ -27,8 +35,8 @@ routes.delete("/produto/:product_id", ProdutoValidator.delete, ProdutoController
 
 
 //Favorito
-routes.get("/favorito/:user_id", FavoritoValidator.getById, FavoritoController.getById);
-routes.post("/favorito", FavoritoValidator.create, FavoritoController.create);
+routes.get("/favorito/:user_id", FavoritoValidator.getById, auth.authenticateToken, FavoritoController.getById);
+routes.post("/favorito", FavoritoValidator.create,  auth.authenticateToken, FavoritoController.create);
 
 // routes.put("/favorito/:favorito_id", FavoritoValidator.update, FavoritoController.update); NAO TEM PORQUE DAR UPDATE EM FAVORITO, OU EH OU NAO EH
 routes.delete("/favorito/:favorito_id", FavoritoValidator.delete ,FavoritoController.delete);

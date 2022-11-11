@@ -19,13 +19,12 @@ module.exports = {
         return result;
     },
 
-    async getByUserWithFilters(user_id,{product_name}){
+    async getByUserWithFilters(user_id){
         const result = await connection("favorito")
             .innerJoin("produto", "produto.product_id", "favorito.product_id")
             .where({"favorito.user_id":user_id})
             .select("produto.product_name", "produto.price", "produto.description");
-
-    return result;
+            return result;
     },
 
    /* async update(favorito_id, favorito){
