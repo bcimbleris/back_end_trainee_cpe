@@ -10,12 +10,17 @@ module.exports = {
         if (!/^Bearer$/i.test(scheme))
             return response.status(401).json({ error: 'Token badformatted' });
 
-        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err) => {
-            if (err) return response.status(403).json({ error: 'Invalid authorization token' });
-               
-            request.session = data;
-            
-            next();
-        });
-    }
-}
+            const validToken = await new Promise((res) => {
+                jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, data) => {
+                  if (err) return res(false);
+                  
+                  request.session = data;
+          
+                  return res(true);
+                });
+              });
+          
+              if (validToken) return next();
+              return response.status(403).json({ error: "Invalid authorization token" });
+            },
+          };
